@@ -16,3 +16,29 @@ const server = app.listen(port, () => {
 app.get('/', (req, res) => {
   res.send('It is working...');
 });
+
+app.post('/', (req, res) => {
+  res.json({
+    response_type: 'ephemeral', // in_channel
+    attachments: [
+      {
+        color: '#74AAD8',
+        fields: [
+          {
+            title: 'Project',
+            value: 'Awesome Project',
+            short: true,
+          },
+          {
+            title: 'Environment',
+            value: 'Development',
+            short: true,
+          },
+        ],
+        image_url: `https://unsplash.it/900/600/?random=${Math.random()}`,
+        pretext: JSON.stringify(req.body, null, 2),
+        text: 'Here is a lovely image',
+      },
+    ],
+  });
+});
